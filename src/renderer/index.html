@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:">
+  <title>DropShine</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="out">
+  <svg class="sprite" width="0" height="0" aria-hidden="true">
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V3"/><path d="m17 8-5-5-5 5"/><path d="M5 21h14"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></symbol>
+    <symbol id="i-retry" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></symbol>
+  </svg>
+
+  <main id="card" class="card">
+    <header class="head">
+      <div class="brand">
+        <span id="conn" class="dot" title="Service status"></span>
+        <span>DropShine</span>
+      </div>
+      <div class="head-actions">
+        <button id="btn-history" class="icon-btn" title="Recent files">
+          <svg class="i"><use href="#i-history"/></svg>
+          <span id="badge" class="badge" hidden></span>
+        </button>
+        <button id="btn-auth" class="icon-btn" title="Sign in with AI">
+          <svg class="i"><use href="#i-sparkles"/></svg>
+          <span id="auth-dot" class="auth-dot"></span>
+        </button>
+        <button id="btn-hide" class="icon-btn" title="Hide (Esc)">
+          <svg class="i"><use href="#i-chevron"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section id="home" class="view">
+      <div id="drop" class="drop" role="button" tabindex="0" aria-label="Drop files here, or press Enter to browse">
+        <svg class="i drop-icon"><use href="#i-download"/></svg>
+        <div id="drop-title" class="drop-title">Drop files here</div>
+        <div class="drop-sub">or click to browse</div>
+      </div>
+      <div id="status" class="status" data-kind="ready">
+        <div class="status-icon"><svg id="status-icon" class="i"><use href="#i-check"/></svg></div>
+        <div class="status-body">
+          <div id="status-title" class="status-title"></div>
+          <div id="status-sub" class="status-sub"></div>
+        </div>
+        <button id="status-action" class="mini-btn" hidden></button>
+        <div id="bar" class="bar" hidden><i id="bar-fill"></i></div>
+      </div>
+    </section>
+
+    <section id="history" class="view" hidden>
+      <div class="list-head">
+        <span>Recent</span>
+        <button id="btn-clear" class="link-btn">Clear</button>
+      </div>
+      <ul id="list" class="list"></ul>
+      <div id="empty" class="empty" hidden>Nothing dropped yet</div>
+    </section>
+
+    <div id="auth-pop" class="pop" hidden>
+      <div id="accounts-view" class="pop-view">
+        <div class="pop-head">Accounts</div>
+        <ul id="accounts" class="accounts"></ul>
+        <form id="code-form" class="code-form" hidden>
+          <label for="code-input">Paste the code from your browser</label>
+          <div class="code-row">
+            <input id="code-input" type="text" autocomplete="off" spellcheck="false" placeholder="code#state">
+            <button type="submit" class="mini-btn primary">Connect</button>
+          </div>
+          <div id="code-error" class="code-error" hidden></div>
+        </form>
+      </div>
+
+      <div id="setup" class="pop-view" hidden>
+        <div class="setup-top">
+          <button type="button" id="setup-back" class="link-btn">&larr; Back</button>
+          <span id="setup-title" class="pop-head"></span>
+        </div>
+        <div class="setup-hint">One-time setup. <button type="button" id="setup-console" class="link-btn inline">Open the console</button> to get a client ID.</div>
+        <details class="setup-how">
+          <summary>How do I get it?</summary>
+          <ol id="setup-steps" class="setup-steps"></ol>
+        </details>
+        <form id="setup-form" class="code-form">
+          <div class="code-row">
+            <input id="setup-id" type="text" autocomplete="off" spellcheck="false" placeholder="Client ID">
+            <input id="setup-secret" type="password" autocomplete="off" spellcheck="false" placeholder="Client secret" hidden>
+          </div>
+          <div id="setup-error" class="code-error" hidden></div>
+          <div class="code-row">
+            <button type="submit" class="mini-btn primary">Save and sign in</button>
+            <button type="button" id="setup-app" class="link-btn">Use the drive app instead</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

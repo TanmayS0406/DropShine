@@ -1,0 +1,51 @@
+{
+  "name": "dropshine",
+  "productName": "DropShine",
+  "version": "0.1.0",
+  "description": "Tiny always-on-top drop target that sends files to the DropShine AI service",
+  "main": "src/main/main.js",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "mock": "node mock-backend/server.js",
+    "icons": "node scripts/make-icons.js",
+    "capture": "electron scripts/capture.js",
+    "test": "node --test \"test/*.test.js\"",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.dropshine.app",
+    "productName": "DropShine",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.1.0",
+    "electron-builder": "^26.18.0"
+  }
+}
